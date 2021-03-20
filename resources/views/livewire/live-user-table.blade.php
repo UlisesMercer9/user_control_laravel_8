@@ -16,6 +16,9 @@
                 placeholder="Ingrese el termino de busqueda"
                 wire:model="search"
             >
+            <button wire:click="clear" class="ml-6">
+                <span class="fa fa-eraser"></span>
+            </button>
           </div>
         </div>
         <table class="min-w-full divide-y divide-gray-200">
@@ -23,12 +26,23 @@
             <tr>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Id
+                <button class="mx-3" wire:click="sortable('id')">
+                    <span class="fa fa{{ $camp === 'id' ? $icon: '-circle' }}"></span>
+                </button>
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
+                <div class="flex items-center">
+                    Name
+                <button class="mx-3" wire:click="sortable('name')">
+                    <span class="fa fa{{ $camp === 'name' ? $icon: '-circle' }}"></span>
+                </button>
+                </div>
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Email
+                <button class="mx-3" wire:click="sortable('email')">
+                    <span class="fa fa{{ $camp === 'email' ? $icon: '-circle' }}"></span>
+                </button>
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Role
