@@ -16,6 +16,12 @@
                 placeholder="Ingrese el termino de busqueda"
                 wire:model="search"
             >
+            <select wire:model="user_role">
+              <option value="">Seleccione</option>
+              <option value="admin">Administrador</option>
+              <option value="seller">Vendedor</option>
+              <option value="client">Cliente</option>
+            </select>
             <button wire:click="clear" class="ml-6">
                 <span class="fa fa-eraser"></span>
             </button>
@@ -86,7 +92,7 @@
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Admin
+                 {{$user->rol}}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>

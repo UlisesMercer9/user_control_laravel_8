@@ -16,6 +16,8 @@ class LiveUserTable extends Component
     public $camp = null;
     public $order = null;
     public $icon = '-circle';
+    public $user_role = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
         'camp' => ['except' => null],
@@ -24,8 +26,8 @@ class LiveUserTable extends Component
 
     public function render()
     {
-        $users = User::where('name', 'like', "%{$this->search}%")
-        ->orWhere('email', 'like', "%{$this->search}%");
+        $users = User::termino($this->search)
+            ->role($this->user_role);
         
         if($this->camp && $this->order){
             if($this->camp === 'lastname'){
