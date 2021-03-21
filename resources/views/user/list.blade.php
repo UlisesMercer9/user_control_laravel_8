@@ -12,4 +12,8 @@
             </div>
         </div>
     </div>
+    @push('modals')
+        {{-- @livewire('live-modal') --}}
+        <livewire:live-modal></livewire:live-modal>
+    @endpush
 </x-app-layout>

@@ -17,6 +17,7 @@ class LiveUserTable extends Component
     public $order = null;
     public $icon = '-circle';
     public $user_role = '';
+    public $showModal = 'hidden';
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -54,12 +55,13 @@ class LiveUserTable extends Component
 
     public function clear()
     {
-        $this->page = 1;
-        $this->order = null;
-        $this->camp = null;
-        $this->icon = '-circle';
-        $this->search = '';
-        $this->perPage = 5;
+        $this->reset();
+        // $this->page = 1;
+        // $this->order = null;
+        // $this->camp = null;
+        // $this->icon = '-circle';
+        // $this->search = '';
+        // $this->perPage = 5;
     }
 
     public function updatingSearch()
@@ -94,5 +96,10 @@ class LiveUserTable extends Component
         }
 
         return $sort === 'asc' ? '-arrow-circle-up' : '-arrow-circle-down';
+    }
+
+    public function showModal(User $user)
+    {
+        $this->emit('showModal', $user);
     }
 }
