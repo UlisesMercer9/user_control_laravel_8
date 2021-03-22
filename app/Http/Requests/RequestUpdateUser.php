@@ -21,7 +21,7 @@ class RequestUpdateUser extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules($user)
     {
         return [
             'name' => 'required|min:3|max:30',

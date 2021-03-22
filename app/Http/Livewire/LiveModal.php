@@ -15,9 +15,12 @@ class LiveModal extends Component
     public $email = '';
     public $role = '';
     public $user = null;
+    public $action = '';
+    public $method = '';
 
     protected $listeners = [
-        'showModal'
+        'showModal',
+        'showModalNewUser'
     ];
 
     public function render()
@@ -33,10 +36,23 @@ class LiveModal extends Component
         $this->email = $user->email;
         $this->role = $user->role;
         $this->showModal = '';
+
+        $this->action = 'Actualizar';
+        $this->method = 'updateUser';
+    }
+
+    public function showModalNewUser()
+    {
+        $this->user = null;
+        $this->action = 'Añadir';
+        $this->method = 'createUser';
+        $this->showModal = '';
     }
 
     public function closeModal()
     {
+        $this->resetErrorBag();
+        $this->resetValidation();
         $this->reset();
     }
 
@@ -44,7 +60,7 @@ class LiveModal extends Component
     {
         $requestUser = new RequestUpdateUser();
 
-        $values = $this->validate($requestUser->rules(), $requestUser->messages());
+        $values = $this->validate($requestUser->rules($this->user), $requestUser->messages());
 
         $this->user->update($values);
 
@@ -52,12 +68,24 @@ class LiveModal extends Component
 
         $this->emit('userListUpdate');
 
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
         $this->reset();
     }
 
     public function updated($label)
     {
         $requestUser = new RequestUpdateUser();
-        $this->validateOnly($label, $requestUser->rules(), $requestUser->messages());
+
+        $this->validateOnly($label, $requestUser->rules($this->user), $requestUser->messages());
+    }
+
+    public function createUser()
+    {
+        $requestUser = new RequestUpdateUser();
+
+
     }
 }
