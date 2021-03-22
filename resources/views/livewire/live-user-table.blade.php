@@ -27,9 +27,9 @@
             </button>
           </div>
         </div>
-        <button 
-        type="button" 
-        class="ml-5 mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+        <button
+        type="button"
+        class="ml-5 mt-3 mb-4 px-7 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
         wire:click="showModal"
         >
           <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,7 +58,7 @@
                     Apellido
                 <button class="mx-3" wire:click="sortable('lastname')">
                     <span class="fa fa{{ $camp === 'lastname' ? $icon: '-circle' }}"></span>
-                </button> 
+                </button>
                 </div>
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -104,8 +104,8 @@
                  {{$user->rol}}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a 
-                href="javascript:void(0)" 
+                <a
+                href="javascript:void(0)"
                 class="text-indigo-600 hover:text-indigo-900"
                 wire:click="showModal({{$user->id}})"
                 >

@@ -5,10 +5,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Apellido;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RequestUpdateUser;
 
 class LiveModal extends Component
-{   
+{
     public $showModal = 'hidden';
     public $name = '';
     public $lastname = '';
@@ -17,6 +19,8 @@ class LiveModal extends Component
     public $user = null;
     public $action = '';
     public $method = '';
+    public $password = '';
+    public $password_confirmation = '';
 
     protected $listeners = [
         'showModal',
@@ -86,6 +90,20 @@ class LiveModal extends Component
     {
         $requestUser = new RequestUpdateUser();
 
+        $values = $this->validate($requestUser->rules($this->user), $requestUser->messages());
 
+
+        $user = new User;
+        $apellido  = new Apellido;
+        $apellido->lastname = $values['lastname'];
+
+        $user->fill($values);
+        $user->password = bcrypt($values['password']);
+        DB::transaction(function() use ($user, $apellido){
+            $user->save();
+            $apellido->r_user()->associate($user)->save();
+        });
+
+        $this->closeModal();
     }
 }
