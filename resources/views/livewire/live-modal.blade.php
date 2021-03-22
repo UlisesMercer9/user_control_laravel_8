@@ -13,6 +13,12 @@
                     </div>
                     <div>
                         <x-component-input placeholder="Ingrese su correo" name="email" label="Correo"></x-component-input>
+                        <x-component-input-select 
+                        name="role"
+                        label="Rol"
+                        :options="['admin' => 'Administrador', 'seller' => 'Vendedor', 'client' => 'Cliente']"
+                        >
+                        </x-component-input-select>
                     </div>
                 </form>
             </p>
