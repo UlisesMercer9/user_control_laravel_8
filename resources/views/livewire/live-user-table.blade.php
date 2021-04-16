@@ -46,6 +46,9 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Imagen
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <div class="flex items-center">
                     Nombre
                 <button class="mx-3" wire:click="sortable('name')">
@@ -87,6 +90,11 @@
                     </div>
 
                   </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                  <img class="w-10 h-10 rounded-full" src="{{ asset('storage/'.$user->profile_photo_path)}}" alt="{{$user->name}}">
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">

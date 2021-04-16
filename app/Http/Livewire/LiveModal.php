@@ -8,9 +8,12 @@ use App\Models\User;
 use App\Models\Apellido;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RequestUpdateUser;
+use Livewire\WithFileUploads;
 
 class LiveModal extends Component
 {
+    use WithFileUploads;
+
     public $showModal = 'hidden';
     public $name = '';
     public $lastname = '';
@@ -21,6 +24,7 @@ class LiveModal extends Component
     public $method = '';
     public $password = '';
     public $password_confirmation = '';
+    public $profile_photo_path = null;
 
     protected $listeners = [
         'showModal',
@@ -66,6 +70,11 @@ class LiveModal extends Component
 
         $values = $this->validate($requestUser->rules($this->user), $requestUser->messages());
 
+        $profile = ['profile_photo_path' => $this->loadImage($values['profile_photo_path'])];
+
+        $values = array_merge($values, $profile);
+
+
         $this->user->update($values);
 
         $this->user->r_lastname()->update(['lastname' => $values['lastname']]);
@@ -98,6 +107,7 @@ class LiveModal extends Component
         $apellido->lastname = $values['lastname'];
 
         $user->fill($values);
+        $user->profile_photo_path = loadImage($values['profile_photo_path']);
         $user->password = bcrypt($values['password']);
         DB::transaction(function() use ($user, $apellido){
             $user->save();
@@ -105,5 +115,12 @@ class LiveModal extends Component
         });
 
         $this->closeModal();
+    }
+
+    private function loadImage($image)
+    {
+        $extension = $image->getClientOriginalExtension();
+
+        $location = \Storage::disk('public')->put('img/', $image);
     }
 }

@@ -15,6 +15,7 @@
                     <div>
                         <x-component-input placeholder="Ingrese su correo" name="email" label="Correo"></x-component-input>
                     </div>
+                    
                     @if ($action == 'Añadir')
                     <div class="flex">
                         <x-component-input placeholder="Ingrese su contraseña" name="password" label="Contraseña" type="password"></x-component-input>
@@ -29,6 +30,9 @@
                         >
                         </x-component-input-select>
 
+                    </div>
+                    <div>
+                        <x-component-input placeholder="Ingrese su imagen" name="profile_photo_path" type="file" label="Imagen"></x-component-input>
                     </div>
 
             </p>
